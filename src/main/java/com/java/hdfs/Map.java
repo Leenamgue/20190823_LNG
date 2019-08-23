@@ -13,16 +13,25 @@ public class Map extends Mapper<LongWritable, Text, Text, IntWritable> {
 	// 출력 키 변수
 	protected Text textKey = new Text();
 	// 출력 값 변수
-	protected IntWritable intValue = new IntWritable(1);
+	protected IntWritable intValue = new IntWritable(15);
 	
 	@Override
 	protected void map(LongWritable key, Text value, Mapper<LongWritable, Text, Text, IntWritable>.Context context) throws IOException, InterruptedException {
 		// 출력 키에 넣을 문자열 변수
-		String strKey = "";
-		// 출력 키에 문자열 변수 적용
-		textKey.set(strKey);
-		// 전체 결과 출력하기
-		context.write(textKey, intValue);
+		String[] values = value.toString().split(",");
+		int cancel = Integer.parseInt(values[21]);
+		String strKey = values[0] +"  " +values[1];
+		int limit= 150000;
+//		if(cancel == 0) {
+			
+		
+			// 출력 키에 문자열 변수 적용
+			textKey.set(strKey);
+			
+			
+			// 전체 결과 출력하기
+			context.write(textKey, intValue); //{"PS", 1 } {"PS", 1 } {"PS", 1 } {"PS", 1 } {"PS", 1 } {"PS", 1 }  
+//		}//{"NA", 1 } 
 	}
 	
 }
